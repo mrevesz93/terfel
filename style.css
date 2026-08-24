@@ -2,12 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900&display=swap');
 
 :root {
-    /* A képekhez igazított színpaletta */
-    --bg-dark: #020712;       /* hatter.png mély sötétkékje */
-    --bg-card: #08152b;       /* Kicsit világosabb, telítettebb kék a kártyáknak/szekcióknak */
+    --bg-dark: #020712;
+    --bg-card: #08152b;
     --text-main: #f8fafc;     
     --text-muted: #a3b1c6;    
-    --accent: #e8a846;        /* A tagok.jpg meleg, arany/narancssárga bevilágítása */
+    --accent: #e8a846;
     --header-height: 100px;
 }
 
@@ -31,7 +30,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* --- FEJLÉC (ÁTLÁTSZÓ, TISZTA DIZÁJN) --- */
+/* --- FEJLÉC --- */
 header {
     position: fixed;
     top: 0;
@@ -43,7 +42,7 @@ header {
     align-items: center;
     z-index: 1000;
     background-color: transparent; 
-    transition: all 0.4s ease; /* A magasság animálása maradt */
+    transition: all 0.4s ease;
     
     user-select: none;
     -webkit-user-select: none;
@@ -58,7 +57,7 @@ header::before {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* A menü és a logó mögött marad */
+    z-index: -1;
     transition: all 0.4s ease;
     background-color: transparent;
 }
@@ -221,9 +220,8 @@ header.scrolled::before {
     color: #ffffff;
 }
 
-/* --- KÉRT MÓDOSÍTÁS: Színátmenet az "IRÁNYT ADUNK" szövegre --- */
 .hero-title-front span { 
-    background: linear-gradient(90deg, #5e9dd4, #e8a846); /* Kékből a képen látható arany/narancs felé */
+    background: linear-gradient(90deg, #5e9dd4, #e8a846);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: var(--accent); /* Fallback */
@@ -237,7 +235,7 @@ header.scrolled::before {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     display: block;
     padding: 1rem 0;
-    width: fit-content; /* Ez biztosítja, hogy pontosan a szöveg szélességét vegye fel */
+    width: fit-content;
 }
 
 .hero-subtitle {
@@ -251,7 +249,7 @@ header.scrolled::before {
 .hero-btn {
     display: inline-flex;
     align-items: center;
-    border: 1px solid rgba(232, 168, 70, 0.5); /* Accent szín alapú szegély */
+    border: 1px solid rgba(232, 168, 70, 0.5);
     padding: 15px 35px;
     color: #ffffff;
     text-decoration: none;
@@ -324,9 +322,9 @@ main { flex: 1; }
     color: var(--text-muted); 
     line-height: 1.8; 
     margin-bottom: 1.5rem; 
-    text-align: justify;      /* Sorkizárt igazítás */
-    -webkit-hyphens: auto;    /* Automatikus elválasztás Safarihoz */
-    hyphens: auto;            /* Automatikus elválasztás modern böngészőkhöz */
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }
 .lead-text { font-size: 1.3rem !important; font-weight: 600; color: var(--text-main) !important; }
 
@@ -359,7 +357,7 @@ main { flex: 1; }
 /* --- YOUTUBE ANIMÁLT GÖRGŐ SÁV --- */
 .youtube-marquee-container {
     width: 100%;
-    overflow: hidden; /* Elrejti azt, ami kilóg a képernyőről */
+    overflow: hidden;
     position: relative;
     padding: 1rem 0 2rem 0;
     margin-top: 1rem;
@@ -372,20 +370,18 @@ main { flex: 1; }
     animation: scroll-left 100s linear infinite; 
 }
 
-/* Ha ráhúzod az egeret a tárolóra, megáll az animáció */
 .youtube-marquee-container:hover .youtube-track {
     animation-play-state: paused;
 }
 
 @keyframes scroll-left {
     0% { transform: translateX(0); }
-    /* Mivel duplázva töltjük be a videókat, a felénél (-50%) pontosan ugyanazt látjuk, mint az elején */
     100% { transform: translateX(-50%); } 
 }
 
 .youtube-video {
-    width: 320px; /* Fix szélesség, hogy szép kártyák legyenek */
-    flex-shrink: 0; /* Megakadályozza, hogy összenyomódjanak */
+    width: 320px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -396,7 +392,7 @@ main { flex: 1; }
     box-shadow: 0 8px 25px rgba(0,0,0,0.6);
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 8px;
-    background-color: var(--bg-dark); /* Ha lassan tölt be a videó, ez a háttér */
+    background-color: var(--bg-dark);
 }
 
 .youtube-title {
@@ -417,11 +413,11 @@ main { flex: 1; }
     color: var(--accent);
 }
 
-/* --- LENYÍLÓ TARTALOM (READ MORE) --- */
+/* --- LENYÍLÓ TARTALOM --- */
 .expandable-wrapper {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s ease-out; /* Sima animáció grid segítségével */
+    transition: grid-template-rows 0.5s ease-out;
     margin-bottom: 0.5rem;
 }
 
@@ -477,7 +473,7 @@ footer {
 
 .footer-contact i {
     margin-right: 8px;
-    color: var(--accent); /* Az ikonok megkapják az arany/narancs színt */
+    color: var(--accent);
 }
 
 .footer-bottom p { 
@@ -492,7 +488,7 @@ footer a {
 }
 
 footer a:hover { 
-    color: var(--text-main); /* Hoverre kivilágosodik */
+    color: var(--text-main);
 }
 
 /* --- MOBIL RESZPONZIVITÁS & HERO OPTIMALIZÁLÁS --- */
@@ -505,8 +501,8 @@ footer a:hover {
         width: 300px; 
         height: 100vh;
         
-        background-color: rgba(2, 7, 18, 0.75); /* Áttetsző sötétkék háttér */
-        backdrop-filter: blur(15px);            /* Üveghatás homályosítása */
+        background-color: rgba(2, 7, 18, 0.75);
+        backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
 
         flex-direction: column; 
