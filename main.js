@@ -70,35 +70,22 @@ fadeElements.forEach(el => {
 
 // --- YOUTUBE API VIDEÓK BETÖLTÉSE ---
 
-// 1. Ide írd majd be a Google Cloudból kapott API kulcsot (idézőjelek közé!)
-const YOUTUBE_API_KEY = 'AIzaSyC_a09IguEQEDsFcaxkobSMgfmf43tmjNg';
-
-// 2. Ide jön a csatornád azonosítója (UC-vel kezdődik)
 const CHANNEL_ID = 'UCACAa788SkpZo7wiw1S68MQ'; 
 
 async function fetchYouTubeVideos() {
     const feedContainer = document.getElementById('youtube-feed');
     if (!feedContainer) return; 
-    
-    // Védelem: ha nincs még kulcs megadva
-    if (YOUTUBE_API_KEY === 'IDE_JÖN_AZ_API_KULCS' || CHANNEL_ID === 'IDE_JÖN_A_CHANNEL_ID') {
-        feedContainer.innerHTML = '<p style="text-align: center; width: 100%;">A videók megjelenítéséhez állítsd be az API kulcsot és a Channel ID-t a main.js fájlban!</p>';
-        return;
-    }
 
-    // A KVÓTAKÍMÉLŐ TRÜKK: Az "Uploads" (Feltöltések) lejátszási lista ID-ja megegyezik 
-    // a Channel ID-val, csak "UC" helyett "UU" betűkkel kezdődik.
     const UPLOADS_PLAYLIST_ID = CHANNEL_ID.replace(/^UC/, 'UU');
     
-    // 3 videót kérünk le (maxResults=3)
-    const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=10&key=${YOUTUBE_API_KEY}`;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=10&key=AIzaSyC_a09IguEQEDsFcaxkobSMgfmf43tmjNg`;
 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
 
         if (data.items) {
-            let htmlContent = ''; // Ide gyűjtjük a videókat
+            let htmlContent = '';
             
             data.items.forEach(item => {
                 const videoId = item.snippet.resourceId.videoId;
@@ -121,10 +108,8 @@ async function fetchYouTubeVideos() {
                 `;
             });
             
-            // TRÜKK: Kétszer fűzzük be a tartalmat, hogy a végtelen görgetés folyamatos (zökkenőmentes) legyen
             feedContainer.innerHTML = htmlContent + htmlContent;
             
-            // Az új elemeken is aktiváljuk a fade-in effektet
             const newFadeElements = document.querySelectorAll('#youtube-feed .fade-in-element');
             newFadeElements.forEach(el => appearOnScroll.observe(el));
 
@@ -138,7 +123,6 @@ async function fetchYouTubeVideos() {
     }
 }
 
-// Ha az oldal betöltött, elindítjuk a lekérést
 window.addEventListener('DOMContentLoaded', fetchYouTubeVideos);
 
 // --- BŐVEBBEN GOMBOK MŰKÖDÉSE ---
@@ -147,13 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     readMoreBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Megkeressük a gomb előtti rejtett tartalmat
             const wrapper = this.previousElementSibling;
             
-            // "expanded" osztály hozzáadása / elvétele
             const isExpanded = wrapper.classList.toggle('expanded');
             
-            // Ikon és szöveg megfordítása
             if (isExpanded) {
                 this.innerHTML = 'Kevesebb <i class="fa-solid fa-chevron-up"></i>';
             } else {
