@@ -1,0 +1,6 @@
+User-agent: *
+
+Allow: /
+Disallow: /404.html
+Disallow: /img/
+Allow: /img/og_borito.png
