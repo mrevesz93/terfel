@@ -143,3 +143,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Csapattagok 'Továbbiak' gombjainak működése
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.member-read-more-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const wrapper = button.previousElementSibling; // A .member-intro-wrapper
+            wrapper.classList.toggle('expanded');
+            
+            if (wrapper.classList.contains('expanded')) {
+                button.innerHTML = 'Kevesebb <i class="fa-solid fa-chevron-up"></i>';
+            } else {
+                button.innerHTML = 'Továbbiak <i class="fa-solid fa-chevron-down"></i>';
+            }
+        });
+    });
+});
