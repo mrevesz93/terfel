@@ -1,0 +1,104 @@
+body.linktree-body {
+    background-color: var(--bg-dark, #020712);
+    background-image: linear-gradient(rgba(2, 7, 18, 0.85), rgba(2, 7, 18, 0.95)), url('../img/hatter.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.linktree-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem 5% 3rem 5%;
+}
+
+.linktree-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto auto auto; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.linktree-header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.linktree-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 15px rgba(232, 168, 70, 0.15));
+}
+
+.linktree-title {
+    color: var(--text-main, #f8fafc);
+    font-size: 2rem;
+    letter-spacing: 8px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.linktree-subtitle {
+    color: var(--text-muted, #a3b1c6);
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    font-weight: 500;
+}
+
+.linktree-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.linktree-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--accent, #e8a846);
+    color: var(--accent, #e8a846);
+    padding: 16px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.linktree-btn:hover {
+    background-color: var(--accent, #e8a846);
+    color: var(--bg-dark, #020712);
+}
+
+.linktree-btn i {
+    font-size: 1.4rem;
+    position: absolute;
+    left: 20px;
+}
