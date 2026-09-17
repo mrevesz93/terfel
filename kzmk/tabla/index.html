@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>Tábla</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem; /* BETŰMÉRET */
+            letter-spacing: 0.1rem; /* KARAKTERSŰRŰSÉG */
+            font-weight: 500; /* BETŰVASTAGSÁG */
+            overflow: hidden;
+        }
+        #text-area {
+            width: 100vw;
+            height: 100vh;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            font-weight: inherit;
+            resize: none;
+            padding: 20px;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div id="text-area" contenteditable="true" spellcheck="false"></div>
+
+    <script>
+        window.onbeforeunload = function() {
+            return "Biztosan ki akarsz lépni?";
+        };
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey) {
+                switch(e.key.toLowerCase()) {
+                    case 'b':
+                        e.preventDefault();
+                        document.execCommand('bold');
+                        break;
+                    case 'i':
+                        e.preventDefault();
+                        document.execCommand('italic');
+                        break;
+                    case 'u':
+                        e.preventDefault();
+                        document.execCommand('underline');
+                        break;
+                    case '0':
+                        e.preventDefault();
+                        const selection = window.getSelection();
+                        if (selection.rangeCount > 0) {
+                            const range = selection.getRangeAt(0);
+                            let currentColor = 'white';
+                            if (range.startContainer.nodeType === Node.TEXT_NODE) {
+                                const parent = range.startContainer.parentElement;
+                                currentColor = getComputedStyle(parent).color;
+                            } else {
+                                currentColor = getComputedStyle(range.startContainer).color;
+                            }
+                            const newColor = (currentColor === 'rgb(212, 175, 55)') ? 'white' : '#D4AF37';
+                            if (!range.collapsed) {
+                                // Kijelölt szöveg színe vált
+                                const span = document.createElement('span');
+                                span.style.color = newColor;
+                                range.surroundContents(span);
+                            } else {
+                                // Kurzor helyén új span beszúrása
+                                const span = document.createElement('span');
+                                span.style.color = newColor;
+                                range.insertNode(span);
+                                // Kurzor mögé helyezése
+                                const newRange = document.createRange();
+                                newRange.setStartAfter(span);
+                                newRange.setEndAfter(span);
+                                selection.removeAllRanges();
+                                selection.addRange(newRange);
+                            }
+                        }
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

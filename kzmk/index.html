@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teremtett identitás</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="profile-wrapper animate-in delay-1">
+            <img src="kep.jpg" alt="Glasz Bulcsú, Révész Márk, Verbay Csaba" class="profile-img">
+        </div>
+
+        <h1 class="animate-in delay-2">Teremtett identitás</h1>
+        <div class="subtitle animate-in delay-2">2026. március 16.<br>Exsultate</div>
+
+        <div class="links">
+            <a href="./video" class="link-btn animate-in delay-4">Megnézem a bemutatkozást</a>
+            <a href="https://forms.gle/3Fdn5wwRftsoZtzG9/" target="_blank" class="link-btn animate-in delay-4">Jelentkezem</a>
+        </div>
+
+        <footer class="animate-in delay-5">
+
+        <div class="social-icons animate-in delay-5">
+            <a href="https://www.youtube.com/@terfel-media" target="_blank" class="social-icon fa-brands fa-youtube" aria-label="YouTube"></a>
+            <a href="https://www.tiktok.com/@terfel.kozosseg" target="_blank" class="social-icon fa-brands fa-tiktok" aria-label="TikTok"></a>
+            <a href="https://terfel.hu/" target="_blank" class="social-icon fa-solid fa-globe" aria-label="Weboldal"></a>
+        </div>
+
+        <footer class="animate-in delay-5 footer-up">
+            &copy; 2026 Térfél Közösség
+        </footer>
+
+    </div>
+
+    <script>
+        (function(){
+            const wrapper = document.querySelector('.profile-wrapper');
+            if(!wrapper) return;
+            let timer = null;
+            const DURATION = 800; // ms to keep the image colored after interaction
+
+            function activate() {
+                wrapper.classList.add('touch-active');
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => wrapper.classList.remove('touch-active'), DURATION);
+            }
+
+            ['touchstart','touchmove','pointerdown','mousedown','click','scroll'].forEach(evt => {
+                window.addEventListener(evt, activate, {passive: true});
+            });
+        })();
+    </script>
+
+</body>
+</html>

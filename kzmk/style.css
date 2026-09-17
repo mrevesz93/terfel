@@ -1,0 +1,355 @@
+/* --- DESIGN RENDSZER (Sötét + Sárga) --- */
+:root {
+    /* Sötét háttér (nem teljesen fekete, elegánsabb sötétszürke) */
+    --bg-color: #121212; 
+    
+    /* A Mrevesz.com stílusú arany/sárga (Módosíthatod a kódját itt) */
+    --accent: #D4AF37; 
+    
+    /* Szövegszínek */
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    
+    /* Gomb szöveg szín hover állapotban (fekete, hogy olvasható legyen a sárgán) */
+    --btn-text-hover: #000000;
+
+    /* Tipográfia */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    
+    /* Animációk */
+    --anim-duration: 0.8s;
+}
+
+/* Alap beállítások */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 60px 20px;
+    overflow-x: hidden; /* Vízszintes csúszka tiltása animációnál */
+}
+
+/* --- ANIMÁCIÓK --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    opacity: 0;
+    animation: fadeInUp var(--anim-duration) ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+/* --- TARTALOM --- */
+.container {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+/* Profilkép */
+.profile-wrapper {
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-img {
+    width: 180px;
+    height: 120px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 60% / 50%;
+    border: 2px solid var(--accent); /* Sárga keret a kép körül */
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    background-color: rgba(255,255,255,0.02);
+}
+
+.profile-img:hover {
+    filter: grayscale(0%);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); /* Sárga ragyogás */
+}
+
+/* Touch/scroll aktiválásra (mobil) */
+.profile-wrapper.touch-active .profile-img {
+    filter: grayscale(0%);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+/* Szövegek */
+h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent); /* Az alcím sárga lett */
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+}
+
+/* Idézet */
+.quote-box {
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+    border-left: 2px solid var(--accent); /* Sárga díszcsík bal oldalon */
+}
+
+.quote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+/* --- GOMBOK (Sárga outline stílus) --- */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.link-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 18px 24px;
+    background: transparent;
+    color: var(--accent); /* Alapból sárga szöveg */
+    border: 1px solid var(--accent); /* Sárga keret */
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Hover animáció háttér */
+.link-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%; /* Balról jobbra töltés */
+    height: 100%;
+    background-color: var(--accent); /* Sárga háttér */
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+/* Hover állapot */
+.link-btn:hover {
+    color: var(--btn-text-hover); /* Fekete szöveg a sárgán */
+    padding-left: 35px; /* Kicsit nagyobb elmozdulás */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.link-btn:hover::after {
+    width: 100%;
+}
+
+/* Ikonok a gomb mellett (opcionális unicode nyilak) */
+.link-btn::before {
+    position: absolute;
+    left: 10px;
+    opacity: 0;
+    transition: 0.3s;
+    color: var(--btn-text-hover);
+}
+
+.link-btn:hover::before {
+    opacity: 1;
+}
+
+/* --- LÁBLÉC --- */
+footer {
+    margin-top: 4rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* --- SOCIAL ICONS --- */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin: 2.5rem 0 0 0;
+}
+
+.social-icon {
+    font-size: 2.2rem;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    padding: 5px;
+    padding-top: 0.4rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.18s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    z-index: 1; /* keep icons above the fill */
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.social-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0; /* left-to-right fill */
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1; /* behind the icon */
+    border-radius: 50%;
+}
+
+.social-icon:hover::after,
+.social-icon:active::after,
+.social-icon:focus::after {
+    width: 100%;
+}
+
+/* change icon color after the fill completes (delay handled by transition on .social-icon) */
+.social-icon:hover,
+.social-icon:active,
+.social-icon:focus {
+    color: var(--btn-text-hover);
+}
+
+.social-icon i,
+.social-icon::before,
+.social-icon svg {
+    position: relative;
+    z-index: 2; /* ensure icon sits above the fill */
+}
+
+.footer-up {
+    margin-top: 2.5rem;
+    margin-bottom: 24px;
+}
+
+/* --- SOCIAL BUTTONS --- */
+.social-btn {
+    flex: 1 1 0;
+    min-width: 120px;
+    max-width: 180px;
+    height: 56px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+}
+
+.social-btn .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.social-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: -1;
+}
+
+.social-btn:hover,
+.social-btn:active {
+    color: var(--btn-text-hover);
+}
+
+.social-btn:hover::after,
+.social-btn:active::after {
+    width: 100%;
+}
+
+.social-btn .icon svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.social-icon svg {
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.social-icon:hover {
+    transform: scale(1.12);
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+    color: #000;
+}

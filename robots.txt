@@ -1,6 +1,7 @@
 User-agent: *
 
 Allow: /
+Disallow: /kzmk/
 Disallow: /404.html
 Disallow: /img/
 Allow: /img/og_borito.png
